@@ -32,13 +32,9 @@ package day2_basic
 import scala.io.Source
 import scala.util.Using
 
+
 enum RPS:
   case Rock, Paper, Scissors
-
-  def valuation: Int = this match
-    case Rock => 1
-    case Paper => 2
-    case Scissors => 3
 
   infix def compare(other: RPS): Int = (this, other) match
     case (x, y) if x == y => 0
@@ -54,6 +50,7 @@ enum RPS:
     case (Scissors, 1) => Paper
     case (x, -1) => (x complement 1) complement 1
 
+
 val left_options = "ABC"
 val right_options = "XYZ"
 val line_pattern = (s"([$left_options]) ([$right_options])").r
@@ -62,11 +59,19 @@ def parse_line(line: String): (Int, Int) = line match
   case line_pattern(left, right) => left_options.indexOf(left) -> right_options.indexOf(right)
   case _ => throw RuntimeException(s"Invalid line: $line")
 
+
+extension (m: RPS)
+  def valuation: Int = m match
+    case Rock => 1
+    case Paper => 2
+    case Scissors => 3
+
 extension (i: Int)
   def valuation: Int = i match
     case -1 => 0
     case 0 => 3
     case 1 => 6
+
 
 def score(pair: (Int, Int)) =
   val opponent_move = RPS.fromOrdinal(pair._1)
@@ -81,6 +86,7 @@ def real_score(pair: (Int, Int)) =
   val choice_score = (opponent_move complement -game_result).valuation
   val game_score = game_result.valuation
   choice_score + game_score
+
 
 @main def run =
   Using(Source.fromFile("src/main/resources/day2_data.txt"))(f =>

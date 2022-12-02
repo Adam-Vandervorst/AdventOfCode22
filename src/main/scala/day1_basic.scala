@@ -56,8 +56,7 @@ def low_level_max(it: Iterator[String]): Int =
 
   for line <- it do
     if line == "" then
-      if curr > supr then
-        supr = curr
+      supr = curr max supr
       curr = 0
     else
       curr += line.toInt
@@ -69,19 +68,19 @@ def low_level_top(it: Iterator[String], n: Int): Int =
   val top = collection.mutable.ArrayDeque.fill(n)(0)
   var cur = 0
 
-  def search(i: Int = 0): Unit =
-    if i < n && cur > top(i) then search(i + 1)
+  def update_top(i: Int = 0): Unit =
+    if i < n && cur > top(i) then update_top(i + 1)
     else if i > 0 then
       top.insert(i, cur)
       top.dropInPlace(1)
 
   for line <- it do
     if line == "" then
-      search()
+      update_top()
       cur = 0
     else
       cur += line.toInt
-  search()
+  update_top()
 
   top.sum
 
