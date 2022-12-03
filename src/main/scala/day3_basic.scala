@@ -5,23 +5,21 @@ import scala.io.Source
 import scala.util.Using
 
 
-def misplaced(s: String): Int =
+def splitEqual(s: String): List[String] =
   val half = s.length/2
-  var ls = 0L
-  var rs = 0L
-  for i <- 0 until half do
-    ls |= 2L << score(s(i))
-  for i <- half until s.length do
-    rs |= 2L << score(s(i))
+  List(s.take(half), s.drop(half))
 
-  numberOfTrailingZeros(ls & rs) - 1
+def misplaced(gs: Seq[String]): Int =
+  numberOfTrailingZeros(gs
+    .map(_.foldRight(0L)((c, t) => t | (2L << score(c))))
+    .reduce(_ & _)) - 1
 
 def score(i: Char): Long =
-  if i < 97 then i - (64 - 26)
-  else i - 96
+  if i < 97 then i - (65 - 1 - 26)
+  else i - (97 - 1)
 
 
 @main def run =
-  Using(Source.fromFile("src/main/resources/day3_example.txt"))(f =>
-    println(f.getLines().map(misplaced).sum)
+  Using(Source.fromFile("src/main/resources/day3_data.txt"))(f =>
+    println(f.getLines().map(splitEqual).map(misplaced).sum)
   ).get
