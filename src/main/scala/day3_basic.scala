@@ -1,8 +1,8 @@
-package day3_basic
+package aoc22.day3_basic
+
+import aoc22.summarizeResource
 
 import java.lang.Long.numberOfTrailingZeros
-import scala.io.Source
-import scala.util.Using
 
 
 def splitEqual(s: String): List[String] =
@@ -20,6 +20,4 @@ def score(i: Char): Long =
 
 
 @main def run =
-  Using(Source.fromFile("src/main/resources/day3_data.txt"))(f =>
-    println(f.getLines().map(splitEqual).map(misplaced).sum)
-  ).get
+  println(summarizeResource("day3_data.txt")(_.map(splitEqual).map(misplaced).sum))

@@ -44,10 +44,9 @@ In the example above, the top three Elves are the fourth Elf (with 24000 Calorie
 Find the top three Elves carrying the most Calories. How many Calories are those Elves carrying in total?
 */
 
-package day1_basic
+package aoc22.day1_basic
 
-import scala.io.Source
-import scala.util.Using
+import aoc22.summarizeResource
 
 
 def low_level_max(it: Iterator[String]): Int =
@@ -86,6 +85,4 @@ def low_level_top(it: Iterator[String], n: Int): Int =
 
 
 @main def run =
-  Using(Source.fromFile("src/main/resources/day1_data.txt"))(f =>
-    println(low_level_top(f.getLines(), 3))
-  ).get
+  println(summarizeResource("day1_data.txt")(low_level_top(_, 3)))

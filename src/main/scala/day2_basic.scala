@@ -27,10 +27,9 @@ In this example, if you were to follow the strategy guide, you would get a total
 What would your total score be if everything goes exactly according to your strategy guide?
  */
 
-package day2_basic
+package aoc.day2_basic
 
-import scala.io.Source
-import scala.util.Using
+import aoc22.summarizeResource
 
 
 enum RPS:
@@ -90,6 +89,5 @@ def real_score(pair: (Int, Int)) =
 
 
 @main def run =
-  Using(Source.fromFile("src/main/resources/day2_data.txt"))(f =>
-    println(f.getLines().map(parse_line).map(real_score).sum)
-  ).get
+  println(summarizeResource("day2_data.txt")(_.map(parse_line).map(real_score).sum))
+
