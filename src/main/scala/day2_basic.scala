@@ -49,6 +49,7 @@ enum RPS:
     case (Paper, 1) => Rock
     case (Scissors, 1) => Paper
     case (x, -1) => (x complement 1) complement 1
+import RPS.*
 
 
 val left_options = "ABC"
