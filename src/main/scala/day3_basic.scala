@@ -19,5 +19,8 @@ def score(i: Char): Long =
   else i - (97 - 1)
 
 
-@main def run =
+@main def run_part1 =
   println(summarizeResource("day3_data.txt")(_.map(splitEqual).map(misplaced).sum))
+
+@main def run_part2 =
+  println(summarizeResource("day3_data.txt")(_.grouped(3).map(misplaced).sum))
