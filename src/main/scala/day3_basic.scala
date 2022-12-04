@@ -5,7 +5,7 @@ import aoc22.summarizeResource
 import java.lang.Long.numberOfTrailingZeros
 
 
-def splitEqual(s: String): List[String] =
+def split_equal(s: String): List[String] =
   val half = s.length/2
   List(s.take(half), s.drop(half))
 
@@ -20,7 +20,7 @@ def score(i: Char): Long =
 
 
 @main def run_part1 =
-  println(summarizeResource("day3_data.txt")(_.map(splitEqual).map(misplaced).sum))
+  println(summarizeResource("day3_data.txt")(_.map(split_equal).map(misplaced).sum))
 
 @main def run_part2 =
   println(summarizeResource("day3_data.txt")(_.grouped(3).map(misplaced).sum))
