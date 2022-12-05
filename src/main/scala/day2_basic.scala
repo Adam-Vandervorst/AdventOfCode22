@@ -25,7 +25,6 @@ import RPS.*
 val left_options = "ABC"
 val right_options = "XYZ"
 val line_pattern = (s"([$left_options]) ([$right_options])").r
-
 def parse_line(line: String): (Int, Int) = line match
   case line_pattern(left, right) => left_options.indexOf(left) -> right_options.indexOf(right)
   case _ => throw RuntimeException(s"Invalid line: $line")
