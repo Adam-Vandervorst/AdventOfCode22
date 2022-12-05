@@ -4,13 +4,14 @@ import aoc22.summarizeResource
 
 import scala.collection.mutable
 
+
 val stack_block = raw"\[(.)\]|    ".r
 def read_stacks(lines: Iterator[String]): Array[mutable.ArrayDeque[Char]] =
   val stacks = mutable.ArrayDeque.empty[mutable.ArrayDeque[Char]]
   for line <- lines
-    (s, i) <- stack_block.findAllMatchIn(line).flatMap(_.subgroups).zipWithIndex do
-      if i >= stacks.length then stacks.append(mutable.ArrayDeque.empty)
-      if s != null then stacks(i).addOne(s.head)
+      (s, i) <- stack_block.findAllMatchIn(line).flatMap(_.subgroups).zipWithIndex do
+    if i >= stacks.length then stacks.append(mutable.ArrayDeque.empty)
+    if s != null then stacks(i).addOne(s.head)
   stacks.toArray
 
 val move_description = raw"move (\d+) from (\d) to (\d)".r
@@ -31,12 +32,12 @@ def tops(stacks: Seq[mutable.ArrayDeque[Char]]): Seq[Char] =
 
 
 @main def run_part1 =
-  println(summarizeResource("day5_data.txt")(lines => {
+  println(summarizeResource("day5_data.txt")(lines =>
     val stacks = read_stacks(lines.takeWhile(!_.isBlank))
     println(stacks.toList)
     execute(stacks, lines.map(read_move), multiple=false)
     tops(stacks).mkString
-  }))
+  ))
 
 @main def run_part2 =
   println(summarizeResource("day5_data.txt")(lines =>
