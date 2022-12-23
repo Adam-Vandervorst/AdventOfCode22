@@ -5,5 +5,6 @@ ThisBuild / scalaVersion := "3.2.1"
 lazy val root = (project in file("."))
   .settings(
     name := "AdventOfCode22",
-    libraryDependencies += "org.scala-lang.modules" %% "scala-collection-contrib" % "0.3.0"
+    libraryDependencies += "org.scala-lang.modules" %% "scala-collection-contrib" % "0.3.0",
+    libraryDependencies += "com.github.j-mie6" %% "parsley" % "4.0.1"
   )
